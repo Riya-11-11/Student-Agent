@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NotesSummarizerRouteImport } from './routes/notes-summarizer'
+import { Route as PyqAnalysisRouteImport } from './routes/pyq-analysis'
+import { Route as SavedPlansRouteImport } from './routes/saved-plans'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as StudyPlanRouteImport } from './routes/study-plan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesSummarizerRoute = NotesSummarizerRouteImport.update({
+  id: '/notes-summarizer',
+  path: '/notes-summarizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PyqAnalysisRoute = PyqAnalysisRouteImport.update({
+  id: '/pyq-analysis',
+  path: '/pyq-analysis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedPlansRoute = SavedPlansRouteImport.update({
+  id: '/saved-plans',
+  path: '/saved-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyPlanRoute = StudyPlanRouteImport.update({
+  id: '/study-plan',
+  path: '/study-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/notes-summarizer': typeof NotesSummarizerRoute
+  '/pyq-analysis': typeof PyqAnalysisRoute
+  '/saved-plans': typeof SavedPlansRoute
+  '/settings': typeof SettingsRoute
+  '/study-plan': typeof StudyPlanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/notes-summarizer': typeof NotesSummarizerRoute
+  '/pyq-analysis': typeof PyqAnalysisRoute
+  '/saved-plans': typeof SavedPlansRoute
+  '/settings': typeof SettingsRoute
+  '/study-plan': typeof StudyPlanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/notes-summarizer': typeof NotesSummarizerRoute
+  '/pyq-analysis': typeof PyqAnalysisRoute
+  '/saved-plans': typeof SavedPlansRoute
+  '/settings': typeof SettingsRoute
+  '/study-plan': typeof StudyPlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/notes-summarizer'
+    | '/pyq-analysis'
+    | '/saved-plans'
+    | '/settings'
+    | '/study-plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/notes-summarizer'
+    | '/pyq-analysis'
+    | '/saved-plans'
+    | '/settings'
+    | '/study-plan'
+  id:
+    | '__root__'
+    | '/'
+    | '/notes-summarizer'
+    | '/pyq-analysis'
+    | '/saved-plans'
+    | '/settings'
+    | '/study-plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NotesSummarizerRoute: typeof NotesSummarizerRoute
+  PyqAnalysisRoute: typeof PyqAnalysisRoute
+  SavedPlansRoute: typeof SavedPlansRoute
+  SettingsRoute: typeof SettingsRoute
+  StudyPlanRoute: typeof StudyPlanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes-summarizer': {
+      id: '/notes-summarizer'
+      path: '/notes-summarizer'
+      fullPath: '/notes-summarizer'
+      preLoaderRoute: typeof NotesSummarizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pyq-analysis': {
+      id: '/pyq-analysis'
+      path: '/pyq-analysis'
+      fullPath: '/pyq-analysis'
+      preLoaderRoute: typeof PyqAnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved-plans': {
+      id: '/saved-plans'
+      path: '/saved-plans'
+      fullPath: '/saved-plans'
+      preLoaderRoute: typeof SavedPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-plan': {
+      id: '/study-plan'
+      path: '/study-plan'
+      fullPath: '/study-plan'
+      preLoaderRoute: typeof StudyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NotesSummarizerRoute: NotesSummarizerRoute,
+  PyqAnalysisRoute: PyqAnalysisRoute,
+  SavedPlansRoute: SavedPlansRoute,
+  SettingsRoute: SettingsRoute,
+  StudyPlanRoute: StudyPlanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
