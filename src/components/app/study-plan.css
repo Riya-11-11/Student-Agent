@@ -1,0 +1,1923 @@
+/* =========================================================
+   STUDY PLAN PAGE
+   Clean • Spacious • Student Friendly • Light/Dark Theme
+   ========================================================= */
+
+.study-plan-page {
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: var(--sp-8) clamp(1rem, 2.5vw, 2.5rem) 3rem;
+
+  color: var(--foreground);
+  container-type: inline-size;
+}
+
+.study-plan-page *,
+.study-plan-page *::before,
+.study-plan-page *::after {
+  box-sizing: border-box;
+}
+
+.study-plan-page.page-enter {
+  gap: 1.25rem;
+}
+
+
+/* =========================================================
+   TOP — BUILD YOUR STUDY PLAN
+   ========================================================= */
+
+.study-plan-page .page-intro.purple {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+
+  width: 100%;
+  min-height: 6.5rem;
+  margin-bottom: 0;
+  padding: var(--sp-5) var(--sp-6);
+
+  overflow: hidden;
+
+  border: 1px solid var(--purple-border);
+  border-radius: 1rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--pastel-purple) 82%, var(--card)),
+      color-mix(in srgb, var(--pastel-blue) 48%, var(--card))
+    );
+
+  box-shadow: var(--soft-shadow);
+}
+
+/* subtle decorative glow */
+.study-plan-page .page-intro.purple::before {
+  content: "";
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  right: -4rem;
+  top: -6rem;
+  border-radius: 50%;
+  background: var(--pastel-purple);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.study-plan-page .page-intro.purple::after {
+  display: none;
+}
+
+.study-plan-page .page-icon {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  flex: 0 0 2.9rem;
+  place-items: center;
+
+  width: 2.9rem;
+  height: 2.9rem;
+
+  border: 1px solid var(--purple-border);
+  border-radius: 0.8rem;
+
+  background: color-mix(
+    in srgb,
+    var(--card) 72%,
+    var(--pastel-purple)
+  );
+
+  color: var(--chart-purple);
+
+  box-shadow: 0 8px 20px color-mix(
+    in srgb,
+    var(--chart-purple) 12%,
+    transparent
+  );
+}
+
+.study-plan-page .page-icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.study-plan-page .page-intro > div {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.study-plan-page .page-intro .eyebrow,
+.study-plan-page .eyebrow {
+  color: var(--chart-purple);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+.study-plan-page .page-intro h1 {
+  margin: var(--sp-1) 0;
+  color: var(--foreground);
+  font-size: clamp(1.55rem, 2vw, 1.8rem);
+  line-height: 1.2;
+  font-weight: 750;
+}
+
+.study-plan-page .page-intro p {
+  max-width: 48rem;
+  margin: var(--sp-2) 0 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   PYQ SUGGESTION
+   ========================================================= */
+
+.study-plan-page .pyq-plan-suggestion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+
+  width: 100%;
+  margin: 0;
+
+  padding: var(--sp-4) var(--sp-5);
+
+  border: 1px solid var(--purple-border);
+  border-radius: 0.9rem;
+
+  background: color-mix(
+    in srgb,
+    var(--pastel-purple) 55%,
+    var(--card)
+  );
+}
+
+.study-plan-page .pyq-plan-suggestion-icon {
+  display: grid;
+  flex: 0 0 2.5rem;
+  place-items: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border-radius: 0.7rem;
+
+  background: var(--card);
+  color: var(--chart-purple);
+}
+
+.study-plan-page .pyq-plan-suggestion-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.study-plan-page .pyq-plan-suggestion-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.study-plan-page .pyq-plan-suggestion-content h3 {
+  margin: var(--sp-1) 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .pyq-plan-suggestion-content p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.study-plan-page .pyq-suggestion-close {
+  display: grid;
+  flex: 0 0 2rem;
+  place-items: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  padding: 0;
+  border: 0;
+  border-radius: 0.55rem;
+
+  background: transparent;
+  color: var(--muted-foreground);
+
+  cursor: pointer;
+}
+
+.study-plan-page .pyq-suggestion-close:hover {
+  background: var(--card);
+  color: var(--foreground);
+}
+
+
+/* =========================================================
+   MAIN WORKSPACE
+   ========================================================= */
+
+.study-plan-page .workspace-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(0, 1.05fr);
+
+  gap: var(--sp-6);
+
+  width: 100%;
+  max-width: none;
+
+  align-items: stretch;
+}
+
+.study-plan-page .form-panel,
+.study-plan-page .result-panel {
+  min-width: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+
+  background: var(--card);
+  box-shadow: var(--soft-shadow);
+}
+
+.study-plan-page .form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  width: 100%;
+  padding: 1.75rem 2rem;
+}
+
+.study-plan-page .result-panel {
+  width: 100%;
+  min-height: 100%;
+  padding: var(--sp-6);
+}
+
+
+/* =========================================================
+   FORM PROGRESS
+   ========================================================= */
+
+.study-plan-page .form-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  margin: 0 0 var(--sp-6);
+}
+
+.study-plan-page .form-step {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.study-plan-page .form-step > span {
+  display: grid;
+  flex: 0 0 1.75rem;
+  place-items: center;
+
+  width: 1.75rem;
+  height: 1.75rem;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--muted);
+  color: var(--muted-foreground);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.study-plan-page .form-step.active > span {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.study-plan-page .form-step small {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.study-plan-page .form-step.active small {
+  color: var(--foreground);
+  font-weight: 650;
+}
+
+.study-plan-page .form-progress-line {
+  flex: 1;
+  min-width: 1rem;
+  height: 1px;
+  background: var(--border);
+}
+
+
+/* =========================================================
+   PANEL TITLE
+   ========================================================= */
+
+.study-plan-page .panel-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+
+  margin: 0 0 var(--sp-5);
+}
+
+.study-plan-page .panel-title > div:first-child {
+  min-width: 0;
+}
+
+.study-plan-page .panel-title h2 {
+  margin: var(--sp-1) 0;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.study-plan-page .panel-title p {
+  margin: var(--sp-2) 0 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.study-plan-page .panel-title-icon {
+  display: grid;
+  flex: 0 0 2.75rem;
+  place-items: center;
+
+  width: 2.75rem;
+  height: 2.75rem;
+
+  border-radius: 0.8rem;
+
+  background: var(--pastel-purple);
+  color: var(--chart-purple);
+}
+
+.study-plan-page .panel-title-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+
+/* =========================================================
+   FORM SECTIONS
+   ========================================================= */
+
+.study-plan-page .form-section {
+  display: grid;
+  gap: var(--sp-4);
+
+  min-width: 0;
+
+  padding: var(--sp-5) 0;
+
+  border-top: 1px solid var(--border);
+}
+
+.study-plan-page .form-section.first-section {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.study-plan-page .form-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.study-plan-page .form-section-heading > div {
+  min-width: 0;
+}
+
+.study-plan-page .form-section-heading h3 {
+  margin: var(--sp-1) 0 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.study-plan-page .form-section-heading > svg {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--muted-foreground);
+}
+
+.study-plan-page .form-section-helper {
+  margin: calc(var(--sp-2) * -1) 0 0;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FIELDS
+   ========================================================= */
+
+.study-plan-page .field {
+  display: grid;
+  gap: var(--sp-2);
+
+  min-width: 0;
+
+  color: var(--foreground);
+  font-size: 0.9rem;
+}
+
+.study-plan-page .field > span {
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.study-plan-page .field input:not([type="checkbox"]),
+.study-plan-page .field select,
+.study-plan-page .field textarea {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid var(--input);
+  border-radius: 0.65rem;
+
+  background: var(--background);
+  color: var(--foreground);
+
+  font: inherit;
+  font-size: 0.9rem;
+
+  outline: none;
+
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+.study-plan-page .field input:not([type="checkbox"]),
+.study-plan-page .field select {
+  height: 2.85rem;
+  padding: 0 var(--sp-3);
+}
+
+.study-plan-page .field textarea {
+  min-height: 5rem;
+  padding: var(--sp-3);
+  resize: vertical;
+}
+
+.study-plan-page .field input::placeholder,
+.study-plan-page .field textarea::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.8;
+}
+
+.study-plan-page .field input:not([type="checkbox"]):hover,
+.study-plan-page .field select:hover,
+.study-plan-page .field textarea:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--primary) 45%,
+    var(--input)
+  );
+}
+
+.study-plan-page .field input:not([type="checkbox"]):focus,
+.study-plan-page .field select:focus,
+.study-plan-page .field textarea:focus {
+  border-color: var(--ring);
+
+  box-shadow:
+    0 0 0 3px color-mix(
+      in srgb,
+      var(--ring) 16%,
+      transparent
+    );
+}
+
+.study-plan-page .field-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  margin: 0;
+
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.study-plan-page .field-hint svg {
+  flex: 0 0 auto;
+
+  width: 0.9rem;
+  height: 0.9rem;
+
+  margin-top: 0.1rem;
+
+  color: var(--chart-purple);
+}
+
+
+/* =========================================================
+   FORM ROW
+   ========================================================= */
+
+.study-plan-page .form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: var(--sp-4);
+
+  min-width: 0;
+}
+
+.study-plan-page .form-row > * {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   DAY PICKER
+   ========================================================= */
+
+.study-plan-page .day-picker {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+
+  gap: var(--sp-2);
+
+  min-width: 0;
+}
+
+.study-plan-page .day-picker > label {
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.study-plan-page .day-picker input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+}
+
+.study-plan-page .day-picker input:focus-visible + span {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.study-plan-page .day-picker label > span {
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 2.25rem;
+
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+
+  background: var(--background);
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  font-weight: 650;
+
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.study-plan-page .day-picker label:hover > span {
+  border-color: var(--primary);
+}
+
+.study-plan-page .day-picker input:checked + span {
+  border-color: var(--primary);
+  background: var(--pastel-blue);
+  color: var(--primary);
+}
+
+
+/* =========================================================
+   PRIMARY CTA
+   ========================================================= */
+
+.study-plan-page .primary-wide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+
+  width: 100%;
+  min-height: 3rem;
+
+  margin-top: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+
+  border: 0;
+  border-radius: 0.7rem;
+
+  background: var(--primary);
+  color: var(--primary-foreground);
+
+  font-size: 0.95rem;
+  font-weight: 700;
+
+  box-shadow:
+    0 5px 14px color-mix(
+      in srgb,
+      var(--primary) 18%,
+      transparent
+    );
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+}
+
+.study-plan-page .primary-wide:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px color-mix(
+      in srgb,
+      var(--primary) 22%,
+      transparent
+    );
+}
+
+.study-plan-page .primary-wide:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.study-plan-page .primary-wide:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.study-plan-page .primary-wide svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+}
+
+.study-plan-page .form-submit-helper {
+  margin: var(--sp-3) 0 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  line-height: 1.45;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EMPTY / BUILDING STATES
+   ========================================================= */
+
+.study-plan-page .plan-empty-state,
+.study-plan-page .plan-building-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 31rem;
+
+  padding: var(--sp-6);
+
+  text-align: center;
+}
+
+.study-plan-page .plan-empty-icon,
+.study-plan-page .plan-building-icon {
+  display: grid;
+  place-items: center;
+
+  width: 3.5rem;
+  height: 3.5rem;
+
+  margin-bottom: var(--sp-4);
+
+  border-radius: 1rem;
+
+  background: var(--pastel-purple);
+  color: var(--chart-purple);
+}
+
+.study-plan-page .plan-empty-icon svg,
+.study-plan-page .plan-building-icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.study-plan-page .plan-empty-state h2,
+.study-plan-page .plan-building-state h2 {
+  margin: var(--sp-2) 0;
+
+  font-size: 1.35rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.study-plan-page .plan-empty-state > p,
+.study-plan-page .plan-building-state > p {
+  max-width: 30rem;
+
+  margin: 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.study-plan-page .plan-empty-steps {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: var(--sp-3);
+
+  width: 100%;
+  max-width: 38rem;
+
+  margin-top: var(--sp-6);
+}
+
+.study-plan-page .plan-empty-steps > div {
+  display: flex;
+  align-items: flex-start;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  padding: var(--sp-3);
+
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+
+  background: var(--background);
+
+  text-align: left;
+}
+
+.study-plan-page .plan-empty-steps > div > span {
+  display: grid;
+  flex: 0 0 1.5rem;
+  place-items: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border-radius: 50%;
+
+  background: var(--pastel-blue);
+  color: var(--primary);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.study-plan-page .plan-empty-steps strong {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.study-plan-page .plan-empty-message {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-2);
+
+  margin-top: var(--sp-5);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.study-plan-page .plan-empty-message svg {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--chart-purple);
+}
+
+.study-plan-page .plan-building-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: var(--sp-3) var(--sp-5);
+
+  margin-top: var(--sp-5);
+}
+
+.study-plan-page .plan-building-steps span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+}
+
+.study-plan-page .plan-building-steps svg {
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--chart-mint);
+}
+
+.study-plan-page .state-panel {
+  min-height: 24rem;
+
+  padding: var(--sp-6);
+
+  border: 0;
+
+  background: transparent;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.study-plan-page .plan-result {
+  display: grid;
+  gap: var(--sp-5);
+
+  min-width: 0;
+}
+
+.study-plan-page .plan-result-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: var(--sp-4);
+
+  padding-bottom: var(--sp-4);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.study-plan-page .plan-result-head > div {
+  min-width: 0;
+}
+
+.study-plan-page .plan-result-head h2 {
+  margin: var(--sp-1) 0;
+
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.study-plan-page .plan-result-head p {
+  margin: 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.study-plan-page .status-pill {
+  display: inline-flex;
+  align-items: center;
+
+  gap: var(--sp-1);
+
+  flex: 0 0 auto;
+
+  padding: var(--sp-2) var(--sp-3);
+
+  border: 1px solid var(--green-border);
+  border-radius: 999px;
+
+  background: var(--pastel-green);
+  color: var(--chart-mint);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.study-plan-page .status-pill svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+
+/* =========================================================
+   AT A GLANCE
+   ========================================================= */
+
+.study-plan-page .plan-at-a-glance {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: var(--sp-3);
+}
+
+.study-plan-page .plan-glance-item {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  padding: var(--sp-3);
+
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+
+  background: var(--background);
+}
+
+.study-plan-page .plan-glance-item > svg {
+  flex: 0 0 auto;
+
+  width: 1.15rem;
+  height: 1.15rem;
+
+  color: var(--chart-purple);
+}
+
+.study-plan-page .plan-glance-item > div {
+  min-width: 0;
+}
+
+.study-plan-page .plan-glance-item small,
+.study-plan-page .plan-glance-item strong {
+  display: block;
+}
+
+.study-plan-page .plan-glance-item small {
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .plan-glance-item strong {
+  margin-top: var(--sp-1);
+
+  overflow-wrap: anywhere;
+
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   FOCUS NOTE
+   ========================================================= */
+
+.study-plan-page .plan-focus-note {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  padding: var(--sp-3) var(--sp-4);
+
+  border: 1px solid var(--purple-border);
+  border-radius: 0.75rem;
+
+  background: var(--pastel-purple);
+}
+
+.study-plan-page .plan-focus-note > svg {
+  flex: 0 0 auto;
+
+  width: 1.1rem;
+  height: 1.1rem;
+
+  color: var(--chart-purple);
+}
+
+.study-plan-page .plan-focus-note strong,
+.study-plan-page .plan-focus-note span {
+  display: block;
+  line-height: 1.45;
+}
+
+.study-plan-page .plan-focus-note strong {
+  font-size: 0.9rem;
+}
+
+.study-plan-page .plan-focus-note span {
+  margin-top: var(--sp-1);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   TODAY FOCUS
+   ========================================================= */
+
+.study-plan-page .today-focus-card {
+  min-width: 0;
+
+  padding: var(--sp-5);
+
+  border: 1px solid var(--blue-border);
+  border-radius: 0.9rem;
+
+  background: color-mix(
+    in srgb,
+    var(--pastel-blue) 38%,
+    var(--card)
+  );
+}
+
+.study-plan-page .today-focus-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: var(--sp-4);
+}
+
+.study-plan-page .today-focus-header > div {
+  min-width: 0;
+}
+
+.study-plan-page .today-focus-header h3 {
+  margin: var(--sp-1) 0;
+
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .today-focus-header p {
+  margin: 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.study-plan-page .today-focus-time {
+  flex: 0 0 auto;
+
+  padding: var(--sp-2) var(--sp-3);
+
+  border-radius: 999px;
+
+  background: var(--card);
+  color: var(--foreground);
+
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.study-plan-page .today-focus-topic {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  margin-top: var(--sp-4);
+
+  padding: var(--sp-3);
+
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+
+  background: var(--card);
+}
+
+.study-plan-page .today-focus-icon {
+  display: grid;
+  flex: 0 0 2.25rem;
+  place-items: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  border-radius: 0.65rem;
+
+  background: var(--pastel-purple);
+  color: var(--chart-purple);
+}
+
+.study-plan-page .today-focus-icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.study-plan-page .today-focus-topic > div:last-child {
+  min-width: 0;
+}
+
+.study-plan-page .today-focus-topic span,
+.study-plan-page .today-focus-topic strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.study-plan-page .today-focus-topic span {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.study-plan-page .today-focus-topic strong {
+  margin-top: var(--sp-1);
+  font-size: 0.95rem;
+}
+
+.study-plan-page .today-focus-steps {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: var(--sp-2);
+
+  margin-top: var(--sp-3);
+}
+
+.study-plan-page .today-focus-steps > div {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-2);
+
+  min-width: 0;
+
+  padding: var(--sp-2) var(--sp-3);
+
+  border-radius: 0.6rem;
+
+  background: color-mix(
+    in srgb,
+    var(--card) 72%,
+    transparent
+  );
+}
+
+.study-plan-page .today-focus-steps > div > span {
+  display: grid;
+  flex: 0 0 1.4rem;
+  place-items: center;
+
+  width: 1.4rem;
+  height: 1.4rem;
+
+  border-radius: 50%;
+
+  background: var(--card);
+  color: var(--primary);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.study-plan-page .today-focus-steps strong {
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.study-plan-page .today-focus-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: var(--sp-2);
+
+  width: 100%;
+  min-height: 2.75rem;
+
+  margin-top: var(--sp-4);
+
+  padding: var(--sp-2) var(--sp-4);
+
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+
+  background: var(--primary);
+  color: var(--primary-foreground);
+
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.study-plan-page .today-focus-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+
+/* =========================================================
+   SESSION STATES
+   ========================================================= */
+
+.study-plan-page .session-active {
+  margin-top: var(--sp-4);
+}
+
+.study-plan-page .session-active-message,
+.study-plan-page .session-completed-message {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  padding: var(--sp-3);
+
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+
+  background: var(--card);
+}
+
+.study-plan-page .session-active-message > div,
+.study-plan-page .session-completed-message > div {
+  min-width: 0;
+}
+
+.study-plan-page .session-active-message strong,
+.study-plan-page .session-completed-message strong,
+.study-plan-page .session-active-message > div > span,
+.study-plan-page .session-completed-message > div > span {
+  display: block;
+  line-height: 1.45;
+}
+
+.study-plan-page .session-active-message strong,
+.study-plan-page .session-completed-message strong {
+  font-size: 0.9rem;
+}
+
+.study-plan-page .session-active-message > div > span,
+.study-plan-page .session-completed-message > div > span {
+  margin-top: var(--sp-1);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+}
+
+.study-plan-page .session-active-icon,
+.study-plan-page .session-completed-icon {
+  display: grid;
+  flex: 0 0 2rem;
+  place-items: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  border-radius: 0.6rem;
+
+  background: var(--pastel-blue);
+  color: var(--primary);
+}
+
+.study-plan-page .session-completed-icon {
+  background: var(--pastel-green);
+  color: var(--chart-mint);
+}
+
+.study-plan-page .session-active-icon svg,
+.study-plan-page .session-completed-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+
+/* =========================================================
+   ROADMAP
+   ========================================================= */
+
+.study-plan-page .roadmap-section {
+  min-width: 0;
+}
+
+.study-plan-page .roadmap-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: var(--sp-3);
+
+  margin-bottom: var(--sp-3);
+}
+
+.study-plan-page .roadmap-heading > div {
+  min-width: 0;
+}
+
+.study-plan-page .roadmap-heading h3 {
+  margin: var(--sp-1) 0 0;
+
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .roadmap-heading > span {
+  flex: 0 0 auto;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+}
+
+.study-plan-page .week-stack {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.study-plan-page .week-card {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+
+  background: var(--card);
+}
+
+.study-plan-page .week-summary {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  width: 100%;
+  min-height: 4rem;
+
+  padding: var(--sp-3) var(--sp-4);
+
+  border: 0;
+
+  background: transparent;
+  color: var(--foreground);
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.study-plan-page .week-summary:hover {
+  background: var(--muted);
+}
+
+.study-plan-page .week-summary:focus-visible,
+.study-plan-page .today-focus-button:focus-visible,
+.study-plan-page .pyq-suggestion-close:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.study-plan-page .week-number {
+  display: grid;
+  flex: 0 0 2.25rem;
+  place-items: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  border-radius: 0.65rem;
+
+  background: var(--pastel-purple);
+  color: var(--chart-purple);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.study-plan-page .week-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.study-plan-page .week-heading strong,
+.study-plan-page .week-heading small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.study-plan-page .week-heading strong {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .week-heading small {
+  margin-top: var(--sp-1);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .week-progress-mini {
+  flex: 0 0 auto;
+
+  padding: var(--sp-1) var(--sp-2);
+
+  border-radius: 999px;
+
+  background: var(--muted);
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.study-plan-page .week-summary > svg {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--muted-foreground);
+}
+
+.study-plan-page .week-details {
+  display: grid;
+  gap: var(--sp-3);
+
+  padding: var(--sp-4);
+
+  border-top: 1px solid var(--border);
+}
+
+.study-plan-page .week-goal {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  padding: var(--sp-3);
+
+  border-radius: 0.65rem;
+
+  background: var(--pastel-blue);
+}
+
+.study-plan-page .week-goal > svg {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--primary);
+}
+
+.study-plan-page .week-goal span,
+.study-plan-page .week-goal strong {
+  display: block;
+  line-height: 1.4;
+}
+
+.study-plan-page .week-goal span {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.study-plan-page .week-goal strong {
+  margin-top: var(--sp-1);
+  font-size: 0.85rem;
+}
+
+.study-plan-page .week-detail-item {
+  min-width: 0;
+
+  padding-top: var(--sp-3);
+
+  border-top: 1px solid var(--border);
+}
+
+.study-plan-page .week-detail-item b {
+  display: flex;
+  align-items: center;
+
+  gap: var(--sp-2);
+
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.study-plan-page .week-detail-item b svg {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--chart-purple);
+}
+
+.study-plan-page .week-detail-item p {
+  margin: var(--sp-2) 0 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.study-plan-page .week-task-list {
+  display: grid;
+  gap: var(--sp-2);
+
+  margin-top: var(--sp-3);
+}
+
+.study-plan-page .week-task {
+  display: flex;
+  align-items: flex-start;
+
+  gap: var(--sp-3);
+
+  min-width: 0;
+
+  padding: var(--sp-2) var(--sp-3);
+
+  border-radius: 0.55rem;
+
+  cursor: pointer;
+}
+
+.study-plan-page .week-task:hover {
+  background: var(--muted);
+}
+
+.study-plan-page .week-task input {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  margin: 0.1rem 0 0;
+
+  accent-color: var(--primary);
+}
+
+.study-plan-page .week-task span {
+  min-width: 0;
+
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.study-plan-page .week-task.completed span {
+  color: var(--muted-foreground);
+  text-decoration: line-through;
+}
+
+.study-plan-page .week-bottom-info {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: var(--sp-3) var(--sp-5);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.study-plan-page .week-bottom-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.study-plan-page .week-bottom-info svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.study-plan-page .week-progress {
+  padding-top: var(--sp-2);
+}
+
+.study-plan-page .week-progress-label {
+  display: flex;
+  justify-content: space-between;
+
+  gap: var(--sp-3);
+
+  margin-bottom: var(--sp-2);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+}
+
+.study-plan-page .week-progress-label strong {
+  color: var(--foreground);
+}
+
+.study-plan-page .progress-track {
+  height: 0.35rem;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: var(--muted);
+}
+
+.study-plan-page .progress-track i {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: var(--primary);
+}
+
+.study-plan-page .week-progress-hint {
+  margin: var(--sp-2) 0 0;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   RESULT ACTIONS
+   ========================================================= */
+
+.study-plan-page .result-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  gap: var(--sp-3);
+
+  margin-top: var(--sp-2);
+
+  padding-top: var(--sp-4);
+
+  border-top: 1px solid var(--border);
+}
+
+.study-plan-page .result-actions button {
+  min-height: 2.75rem;
+
+  border-radius: 0.65rem;
+
+  font-size: 0.9rem;
+}
+
+.study-plan-page .save-feedback {
+  display: flex;
+  align-items: flex-start;
+
+  gap: var(--sp-3);
+
+  margin-top: var(--sp-3);
+
+  padding: var(--sp-3) var(--sp-4);
+
+  border: 1px solid var(--green-border);
+  border-radius: 0.7rem;
+
+  background: var(--pastel-green);
+  color: var(--foreground);
+}
+
+.study-plan-page .save-feedback > svg {
+  flex: 0 0 auto;
+
+  width: 1rem;
+  height: 1rem;
+
+  margin-top: 0.1rem;
+
+  color: var(--chart-mint);
+}
+
+.study-plan-page .save-feedback strong,
+.study-plan-page .save-feedback span {
+  display: block;
+  line-height: 1.45;
+}
+
+.study-plan-page .save-feedback strong {
+  font-size: 0.9rem;
+}
+
+.study-plan-page .save-feedback span {
+  margin-top: var(--sp-1);
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .study-plan-page {
+    padding: var(--sp-6) clamp(1rem, 3vw, 2rem) 2.5rem;
+  }
+
+  .study-plan-page .workspace-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-5);
+  }
+
+  .study-plan-page .form-panel {
+    padding-inline: 1.75rem;
+  }
+
+  .study-plan-page .plan-empty-state,
+  .study-plan-page .plan-building-state {
+    min-height: 26rem;
+  }
+}
+
+@container (max-width: 860px) {
+  .study-plan-page .workspace-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+  .study-plan-page {
+    padding: var(--sp-5) var(--sp-4) 2rem;
+  }
+
+  .study-plan-page .page-intro.purple {
+    align-items: flex-start;
+
+    gap: var(--sp-3);
+
+    min-height: auto;
+
+    padding: var(--sp-4);
+  }
+
+  .study-plan-page .page-icon {
+    flex-basis: 2.5rem;
+
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .study-plan-page .page-intro h1 {
+    font-size: 1.55rem;
+  }
+
+  .study-plan-page .page-intro p {
+    font-size: 0.85rem;
+  }
+
+  .study-plan-page .form-panel {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .study-plan-page .result-panel {
+    padding: var(--sp-4);
+  }
+
+  .study-plan-page .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-plan-page .plan-empty-state,
+  .study-plan-page .plan-building-state {
+    min-height: 24rem;
+    padding: var(--sp-4);
+  }
+
+  .study-plan-page .plan-empty-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-plan-page .plan-at-a-glance {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-plan-page .plan-result-head {
+    flex-direction: column;
+  }
+
+  .study-plan-page .result-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-plan-page .result-actions button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .study-plan-page {
+    padding-inline: 0.75rem;
+  }
+
+  .study-plan-page .form-panel {
+    padding-inline: var(--sp-3);
+  }
+
+  .study-plan-page .today-focus-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-plan-page .pyq-plan-suggestion {
+    gap: var(--sp-2);
+    padding: var(--sp-3);
+  }
+
+  .study-plan-page .pyq-plan-suggestion-icon {
+    flex-basis: 2rem;
+
+    width: 2rem;
+    height: 2rem;
+  }
+}
