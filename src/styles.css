@@ -15756,14 +15756,17 @@ summary:focus-visible {
   gap: 1.25rem;
 }
 
+/* Smaller laptops / tablets */
 @media (max-width: 1000px) {
   .saved-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* Phones */
 @media (max-width: 650px) {
   .saved-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
