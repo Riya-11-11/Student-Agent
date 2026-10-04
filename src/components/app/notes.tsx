@@ -1,18 +1,17 @@
 import { useState } from "react";
 import {
   Check,
-  Clipboard,
+  Copy,
   FileImage,
   FileText,
   Link as LinkIcon,
-  RotateCcw,
+  RefreshCw,
   Sparkles,
-  Text,
+  NotebookTabs,
   Trash2,
-  UploadCloud,
+  CloudUpload,
   Lightbulb,
   BookOpen,
-  ArrowRight,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -81,54 +80,19 @@ Remember This
   return (
     <div className="page-enter">
       <PageIntro
-        icon={Text}
-        kicker="Study smarter"
+        icon={NotebookTabs}
+        kicker="Study Tools"
         title="Notes Summarizer"
-        text="Turn long notes into simple points that are easier to understand and revise."
-        tone="green"
+        text="Turn your notes into clear, revision-friendly points."
+        tone="purple"
       />
-
-      {/* Simple student guide */}
-      <div className="notes-guide">
-        <div className="guide-icon">
-          <Lightbulb />
-        </div>
-
-        <div className="guide-content">
-          <strong>How it works</strong>
-
-          <div className="guide-steps">
-            <span>
-              <b>1</b> Add your notes
-            </span>
-
-            <ArrowRight />
-
-            <span>
-              <b>2</b> Summarize
-            </span>
-
-            <ArrowRight />
-
-            <span>
-              <b>3</b> Revise easily
-            </span>
-          </div>
-        </div>
-      </div>
 
       <div className="notes-workspace">
         {/* INPUT PANEL */}
-        <section className="form-panel green-panel">
+        <section className="form-panel purple-panel">
           <div className="panel-title">
             <div>
-              <span className="eyebrow">Step 1</span>
-
               <h2>Add your notes</h2>
-
-              <p className="panel-helper">
-                Choose how you want to add your study material.
-              </p>
             </div>
 
             <div className="notes-sparkle">
@@ -139,7 +103,7 @@ Remember This
           <Tabs defaultValue="text">
             <TabsList className="mode-tabs">
               <TabsTrigger value="text">
-                <Text />
+                <NotebookTabs />
                 Text
               </TabsTrigger>
 
@@ -169,23 +133,12 @@ Remember This
                   placeholder="Paste your notes here..."
                 />
 
-                {!text && (
-                  <span className="textarea-hint">
-                    Tip: You can paste a chapter, class notes or revision
-                    material.
-                  </span>
-                )}
-
                 <div className="notes-input-meta">
                   <span>
                     {text.trim()
                       ? text.trim().split(/\s+/).length
                       : 0}{" "}
                     words
-                  </span>
-
-                  <span>
-                    For best results, use one topic at a time.
                   </span>
                 </div>
               </div>
@@ -196,7 +149,7 @@ Remember This
               <UploadArea
                 accept=".pdf"
                 label="Upload your PDF"
-                detail="PDF files up to 20MB"
+                detail="PDF · Max 20MB"
               />
             </TabsContent>
 
@@ -204,7 +157,7 @@ Remember This
             <TabsContent value="image">
               <UploadArea
                 accept="image/*"
-                label="Upload a photo of your notes"
+                label="Upload your notes"
                 detail="JPG, PNG or WEBP"
               />
             </TabsContent>
@@ -212,14 +165,14 @@ Remember This
             {/* LINK */}
             <TabsContent value="link">
               <label className="field">
-                <span>Paste your notes link</span>
+                <span>Notes link</span>
 
                 <div className="link-input">
                   <LinkIcon />
 
                   <input
                     type="url"
-                    placeholder="Paste your notes link here..."
+                    placeholder="Paste your notes link..."
                   />
                 </div>
               </label>
@@ -234,16 +187,11 @@ Remember This
             <Sparkles />
 
             {status === "loading"
-              ? "Summarizing your notes..."
-              : "Summarize My Notes"}
+              ? "Summarizing..."
+              : "Summarize Notes"}
 
-            {status !== "loading" && <ArrowRight />}
+            {status !== "loading" && <Sparkles />}
           </Button>
-
-          <p className="privacy-hint">
-            ✨ Your notes will be turned into clear, revision-friendly
-            points.
-          </p>
         </section>
 
         {/* OUTPUT PANEL */}
@@ -255,72 +203,36 @@ Remember This
                 <BookOpen />
               </div>
 
-              <span className="eyebrow">Step 2 · Your summary</span>
-
               <h3>Your summary will appear here</h3>
 
               <p>
-                Add your notes on the left and we'll turn them into
-                easy-to-revise points.
+                Add your notes and summarize them to start revising.
               </p>
-
-              <div className="empty-mini-tip">
-                <Sparkles />
-
-                <span>
-                  <strong>Student tip:</strong> Start with one topic or
-                  chapter for a more focused summary.
-                </span>
-              </div>
-
-              <div className="empty-next-step">
-                <ArrowRight />
-
-                <div>
-                  <strong>Start with a small topic</strong>
-
-                  <span>
-                    Paste 1 chapter or concept, then click
-                    “Summarize My Notes”.
-                  </span>
-                </div>
-              </div>
             </div>
           )}
 
           {/* LOADING STATE */}
           {status === "loading" && (
-            <LoadingState message="Turning your notes into simple revision points..." />
+            <LoadingState message="Summarizing your notes..." />
           )}
 
           {/* ERROR STATE */}
-          {status === "error" && <ErrorState retry={summarize} />}
+          {status === "error" && (
+            <ErrorState retry={summarize} />
+          )}
 
           {/* READY STATE */}
           {status === "ready" && (
             <div className="summary-output">
               <div className="panel-title">
                 <div>
-                  <span className="eyebrow">
-                    Step 3 · Ready to revise
-                  </span>
-
-                  <h2>Your Easy Revision Notes</h2>
+                  <h2>Revision Notes</h2>
                 </div>
 
                 <span className="status-pill">
                   <Check />
                   Ready
                 </span>
-              </div>
-
-              <div className="summary-intro">
-                <Sparkles />
-
-                <p>
-                  Here are the important ideas from your notes,
-                  simplified for quick revision.
-                </p>
               </div>
 
               {/* KEY POINTS */}
@@ -372,7 +284,7 @@ Remember This
 
               {/* REMEMBER THIS */}
               <section className="quick-revision">
-                <span>⚡</span>
+                <Lightbulb />
 
                 <div>
                   <h3>Remember This</h3>
@@ -388,27 +300,16 @@ Remember This
               {/* NEXT STEP */}
               <section className="study-next-section">
                 <div className="study-next-icon">
-                  <ArrowRight />
+                  <BookOpen />
                 </div>
 
                 <div>
-                  <span className="eyebrow">Your next step</span>
-
-                  <h3>What to do next</h3>
+                  <h3>Next Steps</h3>
 
                   <ul>
-                    <li>
-                      Read the Key Points once.
-                    </li>
-
-                    <li>
-                      Try recalling the Remember This box without
-                      looking.
-                    </li>
-
-                    <li>
-                      Practise a few questions from this topic.
-                    </li>
+                    <li>Review the key points.</li>
+                    <li>Recall the Remember This section.</li>
+                    <li>Practise questions from this topic.</li>
                   </ul>
                 </div>
               </section>
@@ -418,11 +319,11 @@ Remember This
                 <Lightbulb />
 
                 <div>
-                  <strong>Quick revision tip</strong>
+                  <strong>Revision Tip</strong>
 
                   <p>
-                    Read the “Remember This” box once before your
-                    next revision session.
+                    Review the Remember This section during your next
+                    revision.
                   </p>
                 </div>
               </div>
@@ -433,16 +334,16 @@ Remember This
                   variant="outline"
                   onClick={() => void copy()}
                 >
-                  {copied ? <Check /> : <Clipboard />}
+                  {copied ? <Check /> : <Copy />}
 
-                  {copied ? "Copied" : "Copy summary"}
+                  {copied ? "Copied" : "Copy Summary"}
                 </Button>
 
                 <Button
                   variant="outline"
                   onClick={() => void summarize()}
                 >
-                  <RotateCcw />
+                  <RefreshCw />
                   Regenerate
                 </Button>
 
@@ -474,14 +375,12 @@ function UploadArea({
   return (
     <label className="upload-area">
       <div className="upload-icon">
-        <UploadCloud />
+        <CloudUpload />
       </div>
 
       <b>{label}</b>
 
-      <span>
-        Drag and drop, or click to choose a file
-      </span>
+      <span>Drag and drop or choose a file</span>
 
       <small>{detail}</small>
 

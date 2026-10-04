@@ -2,17 +2,17 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Bell,
   Bookmark,
-  CalendarDays,
+  CalendarCheck,
   ChartNoAxesCombined,
   ChevronRight,
   Home,
   Menu,
   Moon,
+  NotebookTabs,
   Search,
   Settings,
   Sparkles,
   Sun,
-  Text,
   X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
@@ -22,9 +22,9 @@ import { useApp } from "./app-context";
 
 const nav = [
   { label: "Home", to: "/", icon: Home },
-  { label: "Study Plan", to: "/study-plan", icon: CalendarDays },
+  { label: "Study Plan", to: "/study-plan", icon: CalendarCheck },
   { label: "PYQ Analysis", to: "/pyq-analysis", icon: ChartNoAxesCombined },
-  { label: "Notes Summarizer", to: "/notes-summarizer", icon: Text },
+  { label: "Notes Summarizer", to: "/notes-summarizer", icon: NotebookTabs },
   { label: "Saved Plans", to: "/saved-plans", icon: Bookmark },
   { label: "Settings", to: "/settings", icon: Settings },
 ] as const;

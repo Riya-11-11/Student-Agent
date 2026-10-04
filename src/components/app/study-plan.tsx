@@ -3,6 +3,7 @@ import "./study-plan.css";
 import {
   ArrowRight,
   BookOpen,
+  CalendarCheck,
   CalendarDays,
   Check,
   ChevronDown,
@@ -26,7 +27,9 @@ type StudyPlanWorkspaceProps = {
   pyqTopic?: string;
 };
 
-export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
+export function StudyPlanWorkspace({
+  pyqTopic,
+}: StudyPlanWorkspaceProps) {
   const { savePlan } = useApp();
 
   const [status, setStatus] = useState<Status>("empty");
@@ -35,12 +38,16 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
   const [saveMessage, setSaveMessage] = useState("");
   const [sessionStarted, setSessionStarted] = useState(false);
   const [sessionCompleted, setSessionCompleted] = useState(false);
-  const [completedTasks, setCompletedTasks] = useState<Record<string, boolean>>({});
+  const [completedTasks, setCompletedTasks] = useState<
+    Record<string, boolean>
+  >({});
 
   const [goal, setGoal] = useState("Prepare for semester exams");
 
   const [subjects, setSubjects] = useState(
-    pyqTopic ? `DSA, DBMS, OS, Computer Networks, ${pyqTopic}` : "DSA, DBMS, OS, Computer Networks",
+    pyqTopic
+      ? `DSA, DBMS, OS, Computer Networks, ${pyqTopic}`
+      : "DSA, DBMS, OS, Computer Networks",
   );
 
   const [examDate, setExamDate] = useState("2026-11-15");
@@ -48,7 +55,8 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
   const [studyHours, setStudyHours] = useState("3");
   const [level, setLevel] = useState("Intermediate");
 
-  const [showPyqSuggestion, setShowPyqSuggestion] = useState(Boolean(pyqTopic));
+  const [showPyqSuggestion, setShowPyqSuggestion] =
+    useState(Boolean(pyqTopic));
 
   const generate = async () => {
     setStatus("loading");
@@ -76,7 +84,10 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
       current
         .split(",")
         .map((subject) => subject.trim())
-        .filter((subject) => subject.toLowerCase() !== pyqTopic.toLowerCase())
+        .filter(
+          (subject) =>
+            subject.toLowerCase() !== pyqTopic.toLowerCase(),
+        )
         .join(", "),
     );
 
@@ -102,11 +113,13 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
     });
 
     setSaved(true);
-    setSaveMessage("Your study plan has been saved.");
+    setSaveMessage("Plan saved");
   };
 
   const focusTopic =
-    showPyqSuggestion && pyqTopic ? pyqTopic : subjects.split(",")[0]?.trim() || "Your first topic";
+    showPyqSuggestion && pyqTopic
+      ? pyqTopic
+      : subjects.split(",")[0]?.trim() || "Your first topic";
 
   const subjectCount = subjects
     .split(",")
@@ -115,14 +128,16 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
 
   return (
     <div className="study-plan-page page-enter">
+      {/* PAGE HEADER */}
       <PageIntro
-        icon={CalendarDays}
-        kicker="Let's plan your study"
-        title="Build your study plan"
-        text="Tell us your goal and schedule. We'll organise the rest."
+        icon={CalendarCheck}
+        kicker="Study plan"
+        title="Plan what to study"
+        text="Set your goal and schedule."
         tone="purple"
       />
 
+      {/* PYQ SUGGESTION */}
       {pyqTopic && showPyqSuggestion && (
         <section className="pyq-plan-suggestion">
           <div className="pyq-plan-suggestion-icon">
@@ -130,14 +145,11 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
           </div>
 
           <div className="pyq-plan-suggestion-content">
-            <span className="eyebrow">From your PYQ analysis</span>
+            <span className="eyebrow">From PYQ analysis</span>
 
-            <h3>{pyqTopic} could be a good place to start</h3>
+            <h3>Start with {pyqTopic}</h3>
 
-            <p>
-              We've added this topic to your subjects because it appeared regularly in your PYQ
-              analysis.
-            </p>
+            <p>Added from your PYQ insights.</p>
           </div>
 
           <button
@@ -152,26 +164,27 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
       )}
 
       <div className="workspace-grid">
+        {/* FORM */}
         <form className="form-panel" onSubmit={submit}>
           <div className="form-progress">
             <div className="form-step active">
               <span>1</span>
-              <small>Your goal</small>
+              <small>Goal</small>
             </div>
 
             <div className="form-progress-line" />
 
             <div className="form-step">
               <span>2</span>
-              <small>Your schedule</small>
+              <small>Schedule</small>
             </div>
           </div>
 
+          {/* STEP 1 */}
           <div className="panel-title">
             <div>
               <span className="eyebrow">Step 1 of 2</span>
               <h2>What are you preparing for?</h2>
-              <p>Start with your goal and the subjects you want to cover.</p>
             </div>
 
             <div className="panel-title-icon">
@@ -180,12 +193,12 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
           </div>
 
           <div className="form-section first-section">
-            <Field label="Your goal">
+            <Field label="Goal">
               <input
                 required
                 value={goal}
                 onChange={(e) => setGoal(e.target.value)}
-                placeholder="e.g. Prepare for semester exams"
+                placeholder="e.g. Semester exams"
               />
             </Field>
 
@@ -200,12 +213,13 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
               {pyqTopic && showPyqSuggestion && (
                 <small className="field-hint">
                   <TrendingUp />
-                  {pyqTopic} was added from your PYQ insights.
+                  Added from PYQ analysis
                 </small>
               )}
             </Field>
           </div>
 
+          {/* STEP 2 */}
           <div className="form-section">
             <div className="form-section-heading">
               <div>
@@ -215,8 +229,6 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
 
               <Clock3 />
             </div>
-
-            <p className="form-section-helper">Choose a schedule you can realistically follow.</p>
 
             <div className="form-row">
               <Field label="Exam date">
@@ -229,7 +241,10 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
               </Field>
 
               <Field label="Plan length">
-                <select value={timeline} onChange={(e) => setTimeline(e.target.value)}>
+                <select
+                  value={timeline}
+                  onChange={(e) => setTimeline(e.target.value)}
+                >
                   <option>2 weeks</option>
                   <option>4 weeks</option>
                   <option>6 weeks</option>
@@ -239,7 +254,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
             </div>
 
             <div className="form-row">
-              <Field label="Study hours per day">
+              <Field label="Study hours">
                 <input
                   required
                   type="number"
@@ -251,8 +266,11 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                 />
               </Field>
 
-              <Field label="Your level">
-                <select value={level} onChange={(e) => setLevel(e.target.value)}>
+              <Field label="Level">
+                <select
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                >
                   <option value="Beginner">Beginner</option>
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
@@ -262,115 +280,118 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
 
             <Field label="Study days">
               <div className="day-picker">
-                {["M", "T", "W", "T", "F", "S", "S"].map((day, index) => (
-                  <label key={`${day}-${index}`}>
-                    <input type="checkbox" defaultChecked={index < 6} />
-                    <span>{day}</span>
-                  </label>
-                ))}
+                {["M", "T", "W", "T", "F", "S", "S"].map(
+                  (day, index) => (
+                    <label key={`${day}-${index}`}>
+                      <input
+                        type="checkbox"
+                        defaultChecked={index < 6}
+                      />
+                      <span>{day}</span>
+                    </label>
+                  ),
+                )}
               </div>
-
-              <small className="field-hint">
-                Choose the days you can usually study. Rest days are completely okay.
-              </small>
             </Field>
 
             <Field label="Anything else?">
               <textarea
                 rows={2}
-                placeholder="Optional — e.g. I need extra revision for difficult topics"
+                placeholder="Optional"
               />
             </Field>
           </div>
 
-          <Button className="primary-wide" type="submit" disabled={status === "loading"}>
+          <Button
+            className="primary-wide"
+            type="submit"
+            disabled={status === "loading"}
+          >
             <Sparkles />
-            {status === "loading" ? "Building your plan..." : "Create my study plan"}
+
+            {status === "loading"
+              ? "Creating plan..."
+              : "Create study plan"}
+
             {status !== "loading" && <ArrowRight />}
           </Button>
-
-          <p className="form-submit-helper">You can always change your plan later.</p>
         </form>
 
+        {/* RESULT */}
         <section className="result-panel" aria-live="polite">
+          {/* EMPTY */}
           {status === "empty" && (
             <div className="plan-empty-state">
               <div className="plan-empty-icon">
                 <CalendarDays />
               </div>
 
-              <span className="eyebrow">Your roadmap</span>
+              <span className="eyebrow">Your plan</span>
 
               <h2>Your study plan will appear here</h2>
 
-              <p>
-                Fill in the details on the left and we'll turn them into a simple weekly roadmap.
-              </p>
+              <p>Add your details to get started.</p>
 
               <div className="plan-empty-steps">
                 <div>
                   <span>1</span>
-                  <strong>Tell us your goal</strong>
+                  <strong>Set goal</strong>
                 </div>
 
                 <div>
                   <span>2</span>
-                  <strong>Set your schedule</strong>
+                  <strong>Set schedule</strong>
                 </div>
 
                 <div>
                   <span>3</span>
-                  <strong>Start studying</strong>
+                  <strong>Start</strong>
                 </div>
-              </div>
-
-              <div className="plan-empty-message">
-                <Sparkles />
-                <span>We'll help you decide what to focus on first.</span>
               </div>
             </div>
           )}
 
+          {/* LOADING */}
           {status === "loading" && (
             <div className="plan-building-state">
               <div className="plan-building-icon">
                 <Sparkles />
               </div>
 
-              <span className="eyebrow">Almost there</span>
+              <span className="eyebrow">Creating plan</span>
 
-              <h2>Building your study plan...</h2>
-
-              <p>We're turning your goals and schedule into manageable weekly steps.</p>
+              <h2>Putting it together...</h2>
 
               <div className="plan-building-steps">
                 <span>
                   <Check />
-                  Organising subjects
+                  Subjects
                 </span>
 
                 <span>
                   <Check />
-                  Planning your weeks
+                  Schedule
                 </span>
 
                 <span>
                   <Check />
-                  Adding revision
+                  Revision
                 </span>
               </div>
             </div>
           )}
 
+          {/* ERROR */}
           {status === "error" && <ErrorState retry={generate} />}
 
+          {/* READY */}
           {status === "ready" && (
             <div className="plan-result">
               <div className="plan-result-head">
                 <div>
-                  <span className="eyebrow">Your plan is ready ✨</span>
-                  <h2>Let's get started</h2>
-                  <p>You don't have to figure everything out at once. Start with today's focus.</p>
+                  <span className="eyebrow">Plan ready</span>
+
+                  <h2>Here's where to start</h2>
                 </div>
 
                 <span className="status-pill">
@@ -379,58 +400,71 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                 </span>
               </div>
 
+              {/* AT A GLANCE */}
               <div className="plan-at-a-glance">
                 <div className="plan-glance-item">
                   <CalendarDays />
+
                   <div>
                     <small>Exam</small>
+
                     <strong>
-                      {new Date(examDate).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
+                      {new Date(examDate).toLocaleDateString(
+                        "en-IN",
+                        {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        },
+                      )}
                     </strong>
                   </div>
                 </div>
 
                 <div className="plan-glance-item">
                   <Clock3 />
+
                   <div>
                     <small>Daily study</small>
+
                     <strong>{studyHours} hrs</strong>
                   </div>
                 </div>
 
                 <div className="plan-glance-item">
                   <BookOpen />
+
                   <div>
                     <small>Subjects</small>
+
                     <strong>{subjectCount}</strong>
                   </div>
                 </div>
               </div>
 
+              {/* PYQ FOCUS */}
               {pyqTopic && showPyqSuggestion && (
                 <div className="plan-focus-note">
                   <TrendingUp />
 
                   <div>
-                    <strong>Recommended from your PYQs</strong>
-                    <span>Start with {pyqTopic}</span>
+                    <strong>Priority topic</strong>
+                    <span>{pyqTopic}</span>
                   </div>
                 </div>
               )}
 
+              {/* TODAY */}
               <section className="today-focus-card">
                 <div className="today-focus-header">
                   <div>
                     <span className="eyebrow">Start here</span>
                     <h3>Today's focus</h3>
-                    <p>One focused session is enough to get started.</p>
                   </div>
 
-                  <span className="today-focus-time">45 min</span>
+                  <span className="today-focus-time">
+                    45 min
+                  </span>
                 </div>
 
                 <div className="today-focus-topic">
@@ -467,7 +501,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                     className="today-focus-button"
                     onClick={() => setSessionStarted(true)}
                   >
-                    Start today's session
+                    Start session
                     <ArrowRight />
                   </Button>
                 )}
@@ -481,7 +515,10 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
 
                       <div>
                         <strong>Session in progress</strong>
-                        <span>Focus on {focusTopic} for 45 minutes.</span>
+
+                        <span>
+                          {focusTopic} · 45 min
+                        </span>
                       </div>
                     </div>
 
@@ -494,7 +531,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                       }}
                     >
                       <Check />
-                      Mark session complete
+                      Mark complete
                     </Button>
                   </div>
                 )}
@@ -506,17 +543,20 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                     </span>
 
                     <div>
-                      <strong>Session completed 🎉</strong>
-                      <span>Great start. Continue with your roadmap when you're ready.</span>
+                      <strong>Session complete</strong>
+
+                      <span>Continue with your roadmap.</span>
                     </div>
                   </div>
                 )}
               </section>
 
+              {/* ROADMAP */}
               <div className="roadmap-section">
                 <div className="roadmap-heading">
                   <div>
-                    <span className="eyebrow">Your roadmap</span>
+                    <span className="eyebrow">Roadmap</span>
+
                     <h3>{timeline} to go</h3>
                   </div>
 
@@ -526,37 +566,50 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                 <div className="week-stack">
                   {sampleWeeks.map((week) => {
                     const completed = week.tasks.filter(
-                      (_, index) => completedTasks[`${week.week}-${index}`],
+                      (_, index) =>
+                        completedTasks[`${week.week}-${index}`],
                     ).length;
 
                     const progress =
-                      week.tasks.length > 0 ? Math.round((completed / week.tasks.length) * 100) : 0;
+                      week.tasks.length > 0
+                        ? Math.round(
+                            (completed / week.tasks.length) * 100,
+                          )
+                        : 0;
 
                     return (
-                      <article className="week-card" key={week.week}>
+                      <article
+                        className="week-card"
+                        key={week.week}
+                      >
                         <button
                           type="button"
                           className="week-summary"
-                          onClick={() => setExpanded(expanded === week.week ? null : week.week)}
+                          onClick={() =>
+                            setExpanded(
+                              expanded === week.week
+                                ? null
+                                : week.week,
+                            )
+                          }
                         >
-                          <span className="week-number">{week.week}</span>
+                          <span className="week-number">
+                            {week.week}
+                          </span>
 
                           <span className="week-heading">
                             <strong>{week.title}</strong>
-                            <small>
-                              {week.week === 1
-                                ? "Build your foundation"
-                                : week.week === 2
-                                  ? "Practise what you learned"
-                                  : week.week === 3
-                                    ? "Strengthen weak areas"
-                                    : "Revise and test yourself"}
-                            </small>
                           </span>
 
-                          <span className="week-progress-mini">{progress}%</span>
+                          <span className="week-progress-mini">
+                            {progress}%
+                          </span>
 
-                          {expanded === week.week ? <ChevronUp /> : <ChevronDown />}
+                          {expanded === week.week ? (
+                            <ChevronUp />
+                          ) : (
+                            <ChevronDown />
+                          )}
                         </button>
 
                         {expanded === week.week && (
@@ -565,7 +618,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                               <Target />
 
                               <div>
-                                <span>This week's goal</span>
+                                <span>Goal</span>
 
                                 <strong>
                                   {week.week === 1
@@ -573,7 +626,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                                     : week.week === 2
                                       ? "Get comfortable with practice"
                                       : week.week === 3
-                                        ? "Strengthen your weak areas"
+                                        ? "Strengthen weak areas"
                                         : "Revise and test your progress"}
                                 </strong>
                               </div>
@@ -582,7 +635,7 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                             <div className="week-detail-item">
                               <b>
                                 <BookOpen />
-                                What to study
+                                Topics
                               </b>
 
                               <p>{week.topics.join(" · ")}</p>
@@ -597,21 +650,31 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                               <div className="week-task-list">
                                 {week.tasks.map((task, index) => {
                                   const taskId = `${week.week}-${index}`;
-                                  const taskCompleted = Boolean(completedTasks[taskId]);
+                                  const taskCompleted =
+                                    Boolean(
+                                      completedTasks[taskId],
+                                    );
 
                                   return (
                                     <label
                                       key={taskId}
-                                      className={`week-task ${taskCompleted ? "completed" : ""}`}
+                                      className={`week-task ${
+                                        taskCompleted
+                                          ? "completed"
+                                          : ""
+                                      }`}
                                     >
                                       <input
                                         type="checkbox"
                                         checked={taskCompleted}
                                         onChange={() =>
-                                          setCompletedTasks((current) => ({
-                                            ...current,
-                                            [taskId]: !current[taskId],
-                                          }))
+                                          setCompletedTasks(
+                                            (current) => ({
+                                              ...current,
+                                              [taskId]:
+                                                !current[taskId],
+                                            }),
+                                          )
                                         }
                                       />
 
@@ -636,20 +699,24 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
 
                             <div className="week-progress">
                               <div className="week-progress-label">
-                                <span>Your progress</span>
+                                <span>Progress</span>
                                 <strong>{progress}%</strong>
                               </div>
 
                               <div className="progress-track">
-                                <i style={{ width: `${progress}%` }} />
+                                <i
+                                  style={{
+                                    width: `${progress}%`,
+                                  }}
+                                />
                               </div>
 
                               <p className="week-progress-hint">
                                 {progress === 100
-                                  ? "All tasks complete — great work!"
+                                  ? "Complete"
                                   : progress >= 50
-                                    ? "You're halfway there — keep going."
-                                    : "Start with the first task and build your momentum."}
+                                    ? "Halfway there"
+                                    : "Keep going"}
                               </p>
                             </div>
                           </div>
@@ -660,13 +727,15 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
                 </div>
               </div>
 
+              {/* ACTIONS */}
               <div className="result-actions">
                 <Button
                   variant="outline"
                   onClick={() => {
-                    const shouldRegenerate = window.confirm(
-                      "Are you sure you want to create a new study plan?",
-                    );
+                    const shouldRegenerate =
+                      window.confirm(
+                        "Create a new study plan?",
+                      );
 
                     if (shouldRegenerate) {
                       void generate();
@@ -684,12 +753,14 @@ export function StudyPlanWorkspace({ pyqTopic }: StudyPlanWorkspaceProps) {
               </div>
 
               {saveMessage && (
-                <div className="save-feedback" role="status">
+                <div
+                  className="save-feedback"
+                  role="status"
+                >
                   <Check />
 
                   <div>
                     <strong>{saveMessage}</strong>
-                    <span>Your plan is ready whenever you are.</span>
                   </div>
                 </div>
               )}
@@ -722,14 +793,22 @@ export function PageIntro({
 
       <div>
         <span className="eyebrow">{kicker}</span>
+
         <h1>{title}</h1>
+
         <p>{text}</p>
       </div>
     </header>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <label className="field">
       <span>{label}</span>

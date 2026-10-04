@@ -4,13 +4,16 @@
    ========================================================= */
 
 .study-plan-page {
-  --sp-1: 0.25rem;
-  --sp-2: 0.5rem;
-  --sp-3: 0.75rem;
-  --sp-4: 1rem;
-  --sp-5: 1.25rem;
-  --sp-6: 1.5rem;
-  --sp-8: 2rem;
+  --sp-1: var(--space-1);
+  --sp-2: var(--space-2);
+  --sp-3: var(--space-3);
+  --sp-4: var(--space-4);
+  --sp-5: var(--space-5);
+  --sp-6: var(--space-6);
+  --sp-8: var(--space-8);
+
+  --study-shadow-soft: var(--soft-shadow);
+  --study-shadow-card: var(--elevation-card);
 
   box-sizing: border-box;
   width: 100%;
@@ -50,30 +53,29 @@
 
   overflow: hidden;
 
-  border: 1px solid var(--purple-border);
+  border: 1px solid color-mix(in srgb, var(--primary) 15%, var(--border));
   border-radius: 1rem;
 
   background:
     linear-gradient(
       135deg,
-      color-mix(in srgb, var(--pastel-purple) 82%, var(--card)),
-      color-mix(in srgb, var(--pastel-blue) 48%, var(--card))
+      color-mix(in srgb, var(--pastel-purple) 72%, var(--card) 28%),
+      color-mix(in srgb, var(--pastel-blue) 32%, var(--card))
     );
 
-  box-shadow: var(--soft-shadow);
+  box-shadow: var(--study-shadow-soft);
 }
 
-/* subtle decorative glow */
 .study-plan-page .page-intro.purple::before {
   content: "";
   position: absolute;
-  width: 11rem;
-  height: 11rem;
+  width: 12rem;
+  height: 12rem;
   right: -4rem;
   top: -6rem;
   border-radius: 50%;
-  background: var(--pastel-purple);
-  opacity: 0.45;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 14%, transparent), transparent 62%);
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -92,22 +94,18 @@
   width: 2.9rem;
   height: 2.9rem;
 
-  border: 1px solid var(--purple-border);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
   border-radius: 0.8rem;
 
-  background: color-mix(
-    in srgb,
-    var(--card) 72%,
-    var(--pastel-purple)
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--card) 90%, var(--pastel-purple)),
+    color-mix(in srgb, var(--card) 82%, var(--pastel-blue))
   );
 
   color: var(--chart-purple);
 
-  box-shadow: 0 8px 20px color-mix(
-    in srgb,
-    var(--chart-purple) 12%,
-    transparent
-  );
+  box-shadow: 0 10px 24px rgba(109, 79, 255, 0.14);
 }
 
 .study-plan-page .page-icon svg {
@@ -161,14 +159,23 @@
 
   padding: var(--sp-4) var(--sp-5);
 
-  border: 1px solid var(--purple-border);
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
   border-radius: 0.9rem;
 
-  background: color-mix(
-    in srgb,
-    var(--pastel-purple) 55%,
-    var(--card)
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--pastel-purple) 54%, var(--card)),
+    color-mix(in srgb, var(--card) 90%, transparent)
   );
+
+  box-shadow: var(--study-shadow-card);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.study-plan-page .pyq-plan-suggestion:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.09);
+  border-color: color-mix(in srgb, var(--primary) 26%, var(--border));
 }
 
 .study-plan-page .pyq-plan-suggestion-icon {
@@ -181,8 +188,9 @@
 
   border-radius: 0.7rem;
 
-  background: var(--card);
+  background: linear-gradient(135deg, var(--card), color-mix(in srgb, var(--pastel-purple) 70%, var(--card)));
   color: var(--chart-purple);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .study-plan-page .pyq-plan-suggestion-icon svg {
@@ -255,11 +263,11 @@
 .study-plan-page .result-panel {
   min-width: 0;
 
-  border: 1px solid var(--border);
-  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 1.1rem;
 
   background: var(--card);
-  box-shadow: var(--soft-shadow);
+  box-shadow: var(--study-shadow-card);
 }
 
 .study-plan-page .form-panel {
@@ -295,6 +303,7 @@
   flex: 0 0 auto;
   align-items: center;
   gap: var(--sp-2);
+  transition: transform 150ms ease;
 }
 
 .study-plan-page .form-step > span {
@@ -313,12 +322,18 @@
 
   font-size: 0.75rem;
   font-weight: 700;
+  transition: all 180ms ease;
+}
+
+.study-plan-page .form-step.active {
+  transform: translateY(-1px);
 }
 
 .study-plan-page .form-step.active > span {
   border-color: var(--primary);
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 78%, white));
   color: var(--primary-foreground);
+  box-shadow: 0 10px 20px rgba(89, 76, 214, 0.18);
 }
 
 .study-plan-page .form-step small {
@@ -336,7 +351,8 @@
   flex: 1;
   min-width: 1rem;
   height: 1px;
-  background: var(--border);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--border) 100%);
+  opacity: 0.8;
 }
 
 
@@ -381,8 +397,9 @@
 
   border-radius: 0.8rem;
 
-  background: var(--pastel-purple);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-purple) 78%, var(--card)), color-mix(in srgb, var(--pastel-blue) 46%, var(--card)));
   color: var(--chart-purple);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 
 .study-plan-page .panel-title-icon svg {
@@ -472,10 +489,10 @@
   width: 100%;
   min-width: 0;
 
-  border: 1px solid var(--input);
-  border-radius: 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--foreground) 16%);
+  border-radius: 0.7rem;
 
-  background: var(--background);
+  background: color-mix(in srgb, var(--background) 92%, var(--card));
   color: var(--foreground);
 
   font: inherit;
@@ -486,7 +503,8 @@
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease,
-    background-color 150ms ease;
+    background-color 150ms ease,
+    transform 150ms ease;
 }
 
 .study-plan-page .field input:not([type="checkbox"]),
@@ -510,24 +528,16 @@
 .study-plan-page .field input:not([type="checkbox"]):hover,
 .study-plan-page .field select:hover,
 .study-plan-page .field textarea:hover {
-  border-color: color-mix(
-    in srgb,
-    var(--primary) 45%,
-    var(--input)
-  );
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--input));
+  background: color-mix(in srgb, var(--card) 95%, var(--background));
 }
 
 .study-plan-page .field input:not([type="checkbox"]):focus,
 .study-plan-page .field select:focus,
 .study-plan-page .field textarea:focus {
   border-color: var(--ring);
-
-  box-shadow:
-    0 0 0 3px color-mix(
-      in srgb,
-      var(--ring) 16%,
-      transparent
-    );
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 16%, transparent);
+  background: var(--card);
 }
 
 .study-plan-page .field-hint {
@@ -617,9 +627,9 @@
   height: 2.25rem;
 
   border: 1px solid var(--border);
-  border-radius: 0.6rem;
+  border-radius: 0.7rem;
 
-  background: var(--background);
+  background: color-mix(in srgb, var(--background) 90%, var(--card));
   color: var(--muted-foreground);
 
   font-size: 0.8rem;
@@ -628,17 +638,21 @@
   transition:
     border-color 150ms ease,
     background-color 150ms ease,
-    color 150ms ease;
+    color 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .study-plan-page .day-picker label:hover > span {
-  border-color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 48%, var(--border));
+  transform: translateY(-1px);
 }
 
 .study-plan-page .day-picker input:checked + span {
-  border-color: var(--primary);
-  background: var(--pastel-blue);
+  border-color: color-mix(in srgb, var(--primary) 62%, var(--border));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-blue) 88%, var(--card)), color-mix(in srgb, var(--pastel-purple) 50%, var(--card)));
   color: var(--primary);
+  box-shadow: 0 8px 18px rgba(86, 76, 208, 0.12);
 }
 
 
@@ -659,20 +673,15 @@
   padding: var(--sp-3) var(--sp-4);
 
   border: 0;
-  border-radius: 0.7rem;
+  border-radius: 0.75rem;
 
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 82%, white));
   color: var(--primary-foreground);
 
   font-size: 0.95rem;
   font-weight: 700;
 
-  box-shadow:
-    0 5px 14px color-mix(
-      in srgb,
-      var(--primary) 18%,
-      transparent
-    );
+  box-shadow: 0 10px 20px rgba(86, 76, 208, 0.18);
 
   transition:
     transform 150ms ease,
@@ -682,13 +691,7 @@
 
 .study-plan-page .primary-wide:hover:not(:disabled) {
   transform: translateY(-1px);
-
-  box-shadow:
-    0 8px 18px color-mix(
-      in srgb,
-      var(--primary) 22%,
-      transparent
-    );
+  box-shadow: 0 14px 26px rgba(86, 76, 208, 0.22);
 }
 
 .study-plan-page .primary-wide:active:not(:disabled) {
@@ -734,6 +737,9 @@
   padding: var(--sp-6);
 
   text-align: center;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--pastel-purple) 48%, transparent), transparent 42%),
+    var(--card);
 }
 
 .study-plan-page .plan-empty-icon,
@@ -748,8 +754,9 @@
 
   border-radius: 1rem;
 
-  background: var(--pastel-purple);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-purple) 80%, var(--card)), color-mix(in srgb, var(--pastel-blue) 52%, var(--card)));
   color: var(--chart-purple);
+  box-shadow: 0 12px 25px rgba(124, 92, 255, 0.12);
 }
 
 .study-plan-page .plan-empty-icon svg,
@@ -764,6 +771,15 @@
 
   font-size: 1.35rem;
   line-height: 1.3;
+  font-weight: 700;
+}
+
+.study-plan-page .plan-empty-state .eyebrow,
+.study-plan-page .plan-building-state .eyebrow {
+  color: var(--chart-purple);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-weight: 700;
 }
 
@@ -804,9 +820,9 @@
   padding: var(--sp-3);
 
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
 
-  background: var(--background);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 90%, transparent), color-mix(in srgb, var(--muted) 72%, var(--card)));
 
   text-align: left;
 }
@@ -871,9 +887,14 @@
   align-items: center;
   gap: var(--sp-2);
 
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--foreground) 16%);
+  background: color-mix(in srgb, var(--muted) 82%, var(--card));
   color: var(--muted-foreground);
 
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .study-plan-page .plan-building-steps svg {
@@ -988,9 +1009,9 @@
   padding: var(--sp-3);
 
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
 
-  background: var(--background);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 96%, transparent), color-mix(in srgb, var(--muted) 70%, var(--card)));
 }
 
 .study-plan-page .plan-glance-item > svg {
@@ -1040,10 +1061,10 @@
 
   padding: var(--sp-3) var(--sp-4);
 
-  border: 1px solid var(--purple-border);
-  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+  border-radius: 0.8rem;
 
-  background: var(--pastel-purple);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-purple) 62%, var(--card)), color-mix(in srgb, var(--card) 92%, transparent));
 }
 
 .study-plan-page .plan-focus-note > svg {
@@ -1083,14 +1104,18 @@
 
   padding: var(--sp-5);
 
-  border: 1px solid var(--blue-border);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
   border-radius: 0.9rem;
 
-  background: color-mix(
-    in srgb,
-    var(--pastel-blue) 38%,
-    var(--card)
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--pastel-purple) 22%, var(--card)),
+    color-mix(in srgb, var(--pastel-blue) 12%, var(--card))
   );
+  box-shadow: var(--study-shadow-card);
+  transition:
+    border-color var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
 }
 
 .study-plan-page .today-focus-header {
@@ -1128,8 +1153,9 @@
 
   border-radius: 999px;
 
-  background: var(--card);
-  color: var(--foreground);
+  border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
+  background: color-mix(in srgb, var(--card) 88%, var(--pastel-purple));
+  color: var(--primary);
 
   font-size: 0.8rem;
   font-weight: 650;
@@ -1150,7 +1176,7 @@
   border: 1px solid var(--border);
   border-radius: 0.7rem;
 
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) 76%, var(--background));
 }
 
 .study-plan-page .today-focus-icon {
@@ -1163,7 +1189,7 @@
 
   border-radius: 0.65rem;
 
-  background: var(--pastel-purple);
+  background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
   color: var(--chart-purple);
 }
 
@@ -1213,13 +1239,10 @@
 
   padding: var(--sp-2) var(--sp-3);
 
+  border: 1px solid var(--border);
   border-radius: 0.6rem;
 
-  background: color-mix(
-    in srgb,
-    var(--card) 72%,
-    transparent
-  );
+  background: color-mix(in srgb, var(--card) 82%, var(--background));
 }
 
 .study-plan-page .today-focus-steps > div > span {
@@ -1258,14 +1281,42 @@
 
   padding: var(--sp-2) var(--sp-4);
 
-  border: 1px solid var(--border);
-  border-radius: 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
 
-  background: var(--primary);
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    color-mix(in srgb, var(--primary) 82%, var(--chart-cyan))
+  );
   color: var(--primary-foreground);
 
   font-size: 0.9rem;
   font-weight: 650;
+  box-shadow: var(--elevation-button);
+  transition:
+    background var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.study-plan-page .today-focus-button:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    135deg,
+    var(--primary-hover),
+    color-mix(in srgb, var(--primary-hover) 82%, var(--chart-cyan))
+  );
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.study-plan-page .today-focus-button:active {
+  transform: translateY(0);
+}
+
+.study-plan-page .today-focus-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .study-plan-page .today-focus-button svg {
@@ -1279,7 +1330,21 @@
    ========================================================= */
 
 .study-plan-page .session-active {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
   margin-top: var(--sp-4);
+}
+
+.study-plan-page .session-active-message {
+  flex: 1 1 auto;
+}
+
+.study-plan-page .session-active .today-focus-button {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 11rem;
+  margin-top: 0;
 }
 
 .study-plan-page .session-active-message,
@@ -1296,7 +1361,17 @@
   border: 1px solid var(--border);
   border-radius: 0.7rem;
 
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) 76%, var(--background));
+}
+
+.study-plan-page .session-active-message {
+  border-color: color-mix(in srgb, var(--primary) 22%, var(--border));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--pastel-purple) 36%, var(--card)),
+    color-mix(in srgb, var(--card) 76%, var(--background))
+  );
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent);
 }
 
 .study-plan-page .session-active-message > div,
@@ -1352,6 +1427,18 @@
   height: 1rem;
 }
 
+@media (max-width: 640px) {
+  .study-plan-page .session-active {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .study-plan-page .session-active .today-focus-button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 
 /* =========================================================
    ROADMAP
@@ -1401,9 +1488,10 @@
   overflow: hidden;
 
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
 
   background: var(--card);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.03);
 }
 
 .study-plan-page .week-summary {
@@ -1425,10 +1513,11 @@
   text-align: left;
 
   cursor: pointer;
+  transition: background 160ms ease;
 }
 
 .study-plan-page .week-summary:hover {
-  background: var(--muted);
+  background: color-mix(in srgb, var(--muted) 84%, var(--card));
 }
 
 .study-plan-page .week-summary:focus-visible,
@@ -1446,9 +1535,9 @@
   width: 2.25rem;
   height: 2.25rem;
 
-  border-radius: 0.65rem;
+  border-radius: 0.7rem;
 
-  background: var(--pastel-purple);
+  background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
   color: var(--chart-purple);
 
   font-size: 0.8rem;
@@ -1487,8 +1576,8 @@
 
   border-radius: 999px;
 
-  background: var(--muted);
-  color: var(--muted-foreground);
+  background: linear-gradient(135deg, rgba(86, 76, 208, 0.08), rgba(79, 184, 255, 0.08));
+  color: var(--primary);
 
   font-size: 0.8rem;
   font-weight: 650;
@@ -1522,9 +1611,9 @@
 
   padding: var(--sp-3);
 
-  border-radius: 0.65rem;
+  border-radius: 0.7rem;
 
-  background: var(--pastel-blue);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-blue) 72%, var(--card)), rgba(255,255,255,0.1));
 }
 
 .study-plan-page .week-goal > svg {
@@ -1734,9 +1823,16 @@
 .study-plan-page .result-actions button {
   min-height: 2.75rem;
 
-  border-radius: 0.65rem;
+  border-radius: 0.7rem;
 
   font-size: 0.9rem;
+}
+
+.study-plan-page .result-actions .btn-primary,
+.study-plan-page .result-actions button[data-variant="default"],
+.study-plan-page .result-actions button[class*="primary"],
+.study-plan-page .result-actions > button:first-child {
+  box-shadow: 0 12px 22px rgba(86, 76, 208, 0.15);
 }
 
 .study-plan-page .save-feedback {
@@ -1749,10 +1845,10 @@
 
   padding: var(--sp-3) var(--sp-4);
 
-  border: 1px solid var(--green-border);
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
   border-radius: 0.7rem;
 
-  background: var(--pastel-green);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pastel-green) 72%, var(--card)), color-mix(in srgb, var(--card) 92%, transparent));
   color: var(--foreground);
 }
 

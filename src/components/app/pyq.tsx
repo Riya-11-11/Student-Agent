@@ -77,22 +77,10 @@ const reportData = {
     ],
 
     insights: [
-      [
-        "Arrays and Trees appear frequently across the analyzed papers.",
-        "high priority",
-      ],
-      [
-        "Most questions are at a medium difficulty level.",
-        "balanced practice",
-      ],
-      [
-        "Tree traversal repeats across multiple years.",
-        "revise again",
-      ],
-      [
-        "Graph questions increased in recent papers.",
-        "rising topic",
-      ],
+      "Arrays and Trees appear frequently across the analyzed papers.",
+      "Most questions are at a medium difficulty level.",
+      "Tree traversal repeats across multiple years.",
+      "Graph questions increased in recent papers.",
     ],
   },
 
@@ -122,22 +110,10 @@ const reportData = {
     ],
 
     insights: [
-      [
-        "SQL queries appear frequently across the analyzed papers.",
-        "high priority",
-      ],
-      [
-        "Normalization is repeated across multiple years.",
-        "revise again",
-      ],
-      [
-        "Transaction and concurrency questions are common.",
-        "important topic",
-      ],
-      [
-        "Join-based questions appear regularly.",
-        "practice more",
-      ],
+      "SQL queries appear frequently across the analyzed papers.",
+      "Normalization is repeated across multiple years.",
+      "Transaction and concurrency questions are common.",
+      "Join-based questions appear regularly.",
     ],
   },
 
@@ -167,22 +143,10 @@ const reportData = {
     ],
 
     insights: [
-      [
-        "Process scheduling appears frequently across the papers.",
-        "high priority",
-      ],
-      [
-        "Memory management is repeated across multiple years.",
-        "revise again",
-      ],
-      [
-        "Deadlock questions appear regularly.",
-        "important topic",
-      ],
-      [
-        "Scheduling problems are useful for focused practice.",
-        "practice more",
-      ],
+      "Process scheduling appears frequently across the papers.",
+      "Memory management is repeated across multiple years.",
+      "Deadlock questions appear regularly.",
+      "Scheduling problems are useful for focused practice.",
     ],
   },
 
@@ -212,22 +176,10 @@ const reportData = {
     ],
 
     insights: [
-      [
-        "Transport-layer questions appear frequently.",
-        "high priority",
-      ],
-      [
-        "Routing and IP concepts repeat across multiple years.",
-        "revise again",
-      ],
-      [
-        "Subnetting is an important area for practice.",
-        "practice more",
-      ],
-      [
-        "Data-link concepts appear consistently.",
-        "important topic",
-      ],
+      "Transport-layer questions appear frequently.",
+      "Routing and IP concepts repeat across multiple years.",
+      "Subnetting is an important area for practice.",
+      "Data-link concepts appear consistently.",
     ],
   },
 };
@@ -255,8 +207,8 @@ export function PyqWorkspace() {
     if (!hasInput) {
       setInputError(
         mode === "upload"
-          ? "Please upload at least one PYQ paper first."
-          : "Please paste some PYQ questions first.",
+          ? "Upload at least one PYQ paper to continue."
+          : "Paste some PYQ questions to continue.",
       );
       return;
     }
@@ -279,20 +231,20 @@ export function PyqWorkspace() {
   };
 
   return (
-   <div className="study-plan-page page-enter">
+    <div className="study-plan-page page-enter">
       <PageIntro
         icon={Brain}
-        kicker="Learn from past papers"
+        kicker="Past paper analysis"
         title="Analyze your PYQs"
-        text="Upload your previous year questions and we'll help you spot important topics, repeated patterns, and what to revise."
+        text="Find the topics, question types, and patterns worth focusing on."
         tone="purple"
       />
 
       <section className="pyq-input purple-panel">
         <div className="panel-title">
           <div>
-            <span className="eyebrow">Step 1 · Add your questions</span>
-            <h2>How do you want to add your PYQs?</h2>
+            <span className="eyebrow">Step 1</span>
+            <h2>Add your PYQs</h2>
           </div>
 
           <div className="segmented">
@@ -315,23 +267,8 @@ export function PyqWorkspace() {
                 setInputError("");
               }}
             >
-              Paste questions
+              Paste
             </button>
-          </div>
-        </div>
-
-        <div className="pyq-start-guide">
-          <div className="pyq-start-guide-icon">
-            <Lightbulb size={18} />
-          </div>
-
-          <div>
-            <strong>Before you start</strong>
-
-            <p>
-              Add 2–6 years of PYQs if possible. More papers help you spot
-              repeated topics and question patterns more clearly.
-            </p>
           </div>
         </div>
 
@@ -344,15 +281,6 @@ export function PyqWorkspace() {
 
               <span>
                 <FileText /> PDF <FileImage /> Image
-              </span>
-
-              <small>
-                Upload papers from different years to compare repeated topics
-                and question patterns.
-              </small>
-
-              <span className="upload-help">
-                You can select multiple papers at once
               </span>
 
               <input
@@ -369,7 +297,7 @@ export function PyqWorkspace() {
               {files.length > 0 && (
                 <small className="pyq-input-success">
                   ✓ {files.length}{" "}
-                  {files.length === 1 ? "paper" : "papers"} ready for analysis
+                  {files.length === 1 ? "paper" : "papers"} ready
                 </small>
               )}
             </label>
@@ -387,41 +315,42 @@ export function PyqWorkspace() {
 
           <div className="filter-form">
             <label>
-              <span>Which subject?</span>
+              <span>Subject</span>
 
-              <select
+              <input
+                list="subject-options"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-              >
+                placeholder="Select or type a subject"
+              />
+
+              <datalist id="subject-options">
                 <option value="DSA">
                   Data Structures & Algorithms
                 </option>
-
                 <option value="DBMS">
                   Database Management Systems
                 </option>
-
-                <option value="OS">
-                  Operating Systems
-                </option>
-
-                <option value="CN">
-                  Computer Networks
-                </option>
-              </select>
+                <option value="OS">Operating Systems</option>
+                <option value="CN">Computer Networks</option>
+              </datalist>
             </label>
 
             <label>
-              <span>Which years?</span>
+              <span>Years</span>
 
-              <select
+              <input
+                list="year-options"
                 value={yearRange}
                 onChange={(e) => setYearRange(e.target.value)}
-              >
-                <option value="2019-2024">2019 – 2024</option>
-                <option value="2020-2024">2020 – 2024</option>
-                <option value="2022-2024">2022 – 2024</option>
-              </select>
+                placeholder="Select or type years"
+              />
+
+              <datalist id="year-options">
+                <option value="2019-2024" />
+                <option value="2020-2024" />
+                <option value="2022-2024" />
+              </datalist>
             </label>
 
             <Button
@@ -431,13 +360,9 @@ export function PyqWorkspace() {
               <Sparkles />
 
               {status === "loading"
-                ? "Analyzing your PYQs..."
+                ? "Analyzing..."
                 : "Analyze my PYQs"}
             </Button>
-
-            <small className="pyq-analyze-hint">
-              Takes a few seconds • You can update your inputs anytime
-            </small>
           </div>
         </div>
 
@@ -457,21 +382,16 @@ export function PyqWorkspace() {
 
             <div className="pyq-empty-content">
               <span className="eyebrow">
-                Your analysis will appear here
+                Your results will appear here
               </span>
 
-              <h3>See what your PYQs are telling you</h3>
-
-              <p>
-                Add your previous year papers above and we'll turn them into
-                simple revision signals.
-              </p>
+              <h3>See what repeats in your PYQs</h3>
 
               <div className="pyq-empty-points">
                 <span>🔥 Repeated topics</span>
-                <span>📊 Question patterns</span>
-                <span>📈 Year-wise trends</span>
-                <span>🎯 Revision priorities</span>
+                <span>📊 Question types</span>
+                <span>📈 Year trends</span>
+                <span>🎯 Focus areas</span>
               </div>
             </div>
           </div>
@@ -484,21 +404,7 @@ export function PyqWorkspace() {
             </div>
 
             <div className="pyq-loading-content">
-              <span className="eyebrow">Analyzing your PYQs</span>
-
               <h3>{analysisStep}</h3>
-
-              <p>
-                We’re going through your questions to find patterns that can
-                help you plan your revision.
-              </p>
-
-              <div className="pyq-loading-steps">
-                <span className="active">✓ Check questions</span>
-                <span>• Find repeated topics</span>
-                <span>• Spot important patterns</span>
-                <span>• Prepare study insights</span>
-              </div>
             </div>
           </div>
         )}
@@ -508,14 +414,9 @@ export function PyqWorkspace() {
             <div className="pyq-error-icon">⚠</div>
 
             <div className="pyq-error-content">
-              <span className="eyebrow">Something went wrong</span>
+              <h3>Analysis failed</h3>
 
-              <h3>We couldn't finish the analysis</h3>
-
-              <p>
-                Check that your PYQ files or pasted questions are valid, then
-                try the analysis again.
-              </p>
+              <p>Check your input and try again.</p>
 
               <Button onClick={() => void analyze()}>
                 Try again
@@ -533,7 +434,6 @@ export function PyqWorkspace() {
   );
 }
 
-
 function Report({
   subject,
   yearRange,
@@ -541,10 +441,12 @@ function Report({
   subject: string;
   yearRange: string;
 }) {
-  const currentReport = reportData[subject as keyof typeof reportData] ?? reportData.DSA;
+  const currentReport =
+    reportData[subject as keyof typeof reportData] ?? reportData.DSA;
 
   const currentYearTrends =
-    yearTrends[subject as keyof typeof yearTrends] ?? yearTrends.DSA;
+    yearTrends[subject as keyof typeof yearTrends] ??
+    yearTrends.DSA;
 
   const currentDifficulty =
     difficultyBySubject[subject as keyof typeof difficultyBySubject] ??
@@ -555,33 +457,36 @@ function Report({
       subject as keyof typeof questionTypesBySubject
     ] ?? questionTypesBySubject.DSA;
 
-const [topicFilter, setTopicFilter] = useState("All topics");
+  const [topicFilter, setTopicFilter] = useState("All topics");
 
-const subjectName = subject || "DSA";
+  const subjectName = subject || "DSA";
 
-const filteredTopics =
-  topicFilter === "All topics"
-    ? currentReport.topics
-    : currentReport.topics.filter((topic) => topic[0] === topicFilter);
+  const filteredTopics =
+    topicFilter === "All topics"
+      ? currentReport.topics
+      : currentReport.topics.filter(
+          (topic) => topic[0] === topicFilter,
+        );
 
-const focusTopic = filteredTopics[0] ?? null;
-const secondTopic = filteredTopics[1] ?? null;
+  const focusTopic = filteredTopics[0] ?? null;
+  const secondTopic = filteredTopics[1] ?? null;
 
-const risingTopic =
-  filteredTopics.find((topic) => topic[4] === "Rising") ??
-  filteredTopics[1] ??
-  null;
-const topDifficulty: string =
-  [...currentDifficulty]
-    .sort((a, b) => b.value - a.value)[0]?.name ?? "Mixed";
+  const risingTopic =
+    filteredTopics.find((topic) => topic[4] === "Rising") ??
+    filteredTopics[1] ??
+    null;
+
+  const topDifficulty: string =
+    [...currentDifficulty]
+      .sort((a, b) => b.value - a.value)[0]?.name ?? "Mixed";
 
   const topQuestionType: string =
-  [...currentQuestionTypes]
-    .sort((a, b) => b.value - a.value)[0]?.name ?? "Mixed questions";
+    [...currentQuestionTypes]
+      .sort((a, b) => b.value - a.value)[0]?.name ??
+    "Mixed questions";
 
   return (
     <div className="pyq-v2-report">
-      {/* HEADER */}
       <header className="pyq-v2-header">
         <div>
           <div className="pyq-v2-eyebrow">
@@ -591,39 +496,28 @@ const topDifficulty: string =
 
           <h2>{subjectName} exam patterns</h2>
 
-<p className="pyq-v2-year-range">
-  Based on PYQs from {yearRange.replace("-", " – ")}. See what keeps
-  repeating and where to focus next.
-</p>
-        </div>
-
-        <div className="pyq-v2-ready">
-          <span className="pyq-v2-ready-dot" />
-          Analysis ready
+          <p className="pyq-v2-year-range">
+            {yearRange.replace("-", " – ")}
+          </p>
         </div>
       </header>
 
-      {/* QUICK READ */}
       <section className="pyq-v2-section pyq-v2-quick-read">
         <div className="pyq-v2-section-heading">
           <div>
             <span className="pyq-v2-label">QUICK READ</span>
 
-            <h3>Your PYQ story</h3>
-
-            <p>
-              Start here if you only have a minute. These are the patterns
-              worth noticing first.
-            </p>
+            <h3>What should you focus on?</h3>
           </div>
         </div>
 
         <div className="pyq-v2-insight-grid">
-          {/* FOCUS */}
           <article className="pyq-v2-insight-card pyq-v2-insight-primary">
             <div className="pyq-v2-card-top">
               <span className="pyq-v2-icon">🎯</span>
-              <span className="pyq-v2-mini-label">START HERE</span>
+              <span className="pyq-v2-mini-label">
+                FOCUS FIRST
+              </span>
             </div>
 
             <h4>{focusTopic?.[0]}</h4>
@@ -634,16 +528,16 @@ const topDifficulty: string =
             </div>
 
             <p>
-              Appeared in <strong>{focusTopic?.[3]}</strong>. This is the first
-              topic worth revising.
+              Appeared in <strong>{focusTopic?.[3]}</strong>.
             </p>
           </article>
 
-          {/* TREND */}
           <article className="pyq-v2-insight-card">
             <div className="pyq-v2-card-top">
               <span className="pyq-v2-icon">📈</span>
-              <span className="pyq-v2-mini-label">WATCH THIS</span>
+              <span className="pyq-v2-mini-label">
+                KEEP AN EYE ON
+              </span>
             </div>
 
             <h4>{risingTopic?.[0]}</h4>
@@ -651,14 +545,8 @@ const topDifficulty: string =
             <div className="pyq-v2-trend-badge">
               {risingTopic?.[4] || "Active"}
             </div>
-
-            <p>
-              This topic has a noticeable pattern across the papers. Keep it
-              on your practice list.
-            </p>
           </article>
 
-          {/* PRACTICE */}
           <article className="pyq-v2-insight-card">
             <div className="pyq-v2-card-top">
               <span className="pyq-v2-icon">🧠</span>
@@ -672,55 +560,41 @@ const topDifficulty: string =
             </div>
 
             <p>
-              Also keep <strong>{topDifficulty}</strong>-level questions in
-              your practice mix.
+              Focus on <strong>{topDifficulty}</strong>-level
+              questions.
             </p>
           </article>
         </div>
 
-        {/* NEXT MOVE */}
         <div className="pyq-v2-next-move">
           <div className="pyq-v2-next-icon">
             <ArrowRight size={18} />
           </div>
 
           <div>
-            <span>BEST NEXT MOVE</span>
+            <span>NEXT MOVE</span>
 
             <p>
-              Revise <strong>{focusTopic?.[0]}</strong> → solve a few PYQs →
-              then move to <strong>{secondTopic?.[0]}</strong>.
+              Revise <strong>{focusTopic?.[0]}</strong>, then
+              practise <strong>{secondTopic?.[0]}</strong>.
             </p>
           </div>
         </div>
-
-        <div className="pyq-v2-stop-note">
-          <Lightbulb size={16} />
-          <span>
-            Short on time? You can stop here and start with{" "}
-            <strong>{focusTopic?.[0]}</strong>. The sections below are optional
-            details.
-          </span>
-        </div>
       </section>
 
-      {/* TOPIC MAP */}
       <section className="pyq-v2-section">
         <div className="pyq-v2-section-heading pyq-v2-heading-with-control">
           <div>
-            <span className="pyq-v2-label">THE PATTERN</span>
+            <span className="pyq-v2-label">TOPICS</span>
 
             <h3>What keeps coming back?</h3>
-
-            <p>
-              Compare topics at a glance instead of reading through a long
-              table.
-            </p>
           </div>
 
           <select
             value={topicFilter}
-            onChange={(event) => setTopicFilter(event.target.value)}
+            onChange={(event) =>
+              setTopicFilter(event.target.value)
+            }
             className="pyq-v2-select"
           >
             <option>All topics</option>
@@ -733,13 +607,25 @@ const topDifficulty: string =
 
         <div className="pyq-v2-topic-list">
           {filteredTopics.map((topic, index) => {
-            const [name, description, frequency, papers, trend] = topic;
+            const [
+              name,
+              description,
+              frequency,
+              papers,
+              trend,
+            ] = topic;
 
             const numericFrequency =
-              Number.parseInt(String(frequency).replace("%", ""), 10) || 0;
+              Number.parseInt(
+                String(frequency).replace("%", ""),
+                10,
+              ) || 0;
 
             return (
-              <article className="pyq-v2-topic-row" key={name}>
+              <article
+                className="pyq-v2-topic-row"
+                key={name}
+              >
                 <div className="pyq-v2-topic-number">
                   {String(index + 1).padStart(2, "0")}
                 </div>
@@ -766,7 +652,12 @@ const topDifficulty: string =
                   <div className="pyq-v2-progress-track">
                     <div
                       className="pyq-v2-progress-fill"
-                      style={{ width: `${Math.min(numericFrequency, 100)}%` }}
+                      style={{
+                        width: `${Math.min(
+                          numericFrequency,
+                          100,
+                        )}%`,
+                      }}
                     />
                   </div>
                 </div>
@@ -785,62 +676,58 @@ const topDifficulty: string =
           })}
         </div>
 
-        {/* SMALL INSIGHT */}
         <div className="pyq-v2-pattern-note">
           <div className="pyq-v2-pattern-note-icon">
             <Sparkles size={17} />
           </div>
 
           <div>
-            <strong>One pattern worth noticing</strong>
+            <strong>Worth noticing</strong>
 
             <p>
-              {currentReport.insights?.[0]?.[0] ??
-                `${focusTopic?.[0]} appears regularly, so it deserves early attention.`}
+              {currentReport.insights?.[0] ??
+                `${focusTopic?.[0]} appears regularly.`}
             </p>
           </div>
         </div>
       </section>
 
-      {/* EXPLORE DETAILS */}
       <section className="pyq-v2-section pyq-v2-explore">
         <div className="pyq-v2-section-heading">
           <div>
-            <span className="pyq-v2-label">OPTIONAL DETAILS</span>
+            <span className="pyq-v2-label">MORE DETAILS</span>
 
-            <h3>Explore the pattern</h3>
-
-            <p>
-              Open only the analysis you want to understand. You don't need
-              to read everything.
-            </p>
+            <h3>Explore the analysis</h3>
           </div>
         </div>
 
-        {/* FREQUENCY + TREND */}
-        <details className="pyq-v2-detail-card" open>
+        <details
+          className="pyq-v2-detail-card"
+          open
+        >
           <summary>
             <div className="pyq-v2-summary-icon">📊</div>
 
             <div className="pyq-v2-summary-copy">
               <strong>Frequency & yearly trend</strong>
-              <span>
-                See which topics repeat and how the pattern changes over time.
-              </span>
             </div>
 
-            <span className="pyq-v2-summary-arrow">⌄</span>
+            <span className="pyq-v2-summary-arrow">
+              ⌄
+            </span>
           </summary>
 
           <div className="pyq-v2-detail-content">
             <ChartCard
               title="Topic frequency"
-              description="How often each topic appears in the analysed papers."
-              takeaway={`Start with ${focusTopic?.[0]}, which has the highest frequency in this report.`}
+              takeaway={`Start with ${focusTopic?.[0]}, which appears most often.`}
             >
               <div className="pyq-v2-frequency-list">
                 {currentReport.topics.map((topic) => (
-                  <div className="pyq-v2-frequency-item" key={topic[0]}>
+                  <div
+                    className="pyq-v2-frequency-item"
+                    key={topic[0]}
+                  >
                     <div className="pyq-v2-frequency-head">
                       <span>{topic[0]}</span>
                       <strong>{topic[2]}</strong>
@@ -852,10 +739,13 @@ const topDifficulty: string =
                         style={{
                           width: `${Math.min(
                             Number.parseInt(
-                              String(topic[2]).replace("%", ""),
-                              10
+                              String(topic[2]).replace(
+                                "%",
+                                "",
+                              ),
+                              10,
                             ) || 0,
-                            100
+                            100,
                           )}%`,
                         }}
                       />
@@ -867,25 +757,31 @@ const topDifficulty: string =
 
             <ChartCard
               title="Yearly trend"
-              description="How the topic mix changes across the selected years."
-              takeaway="Use the trend to notice topics that are becoming more or less common."
+              takeaway="Spot topics that are becoming more or less common."
             >
               <ChartContainer
                 config={{
                   topic1: {
-                    label: currentReport.topics[0]?.[0] ?? "Topic 1",
+                    label:
+                      currentReport.topics[0]?.[0] ??
+                      "Topic 1",
                     color: "hsl(var(--chart-1))",
                   },
                   topic2: {
-                    label: currentReport.topics[1]?.[0] ?? "Topic 2",
+                    label:
+                      currentReport.topics[1]?.[0] ??
+                      "Topic 2",
                     color: "hsl(var(--chart-2))",
                   },
                   topic3: {
-                    label: currentReport.topics[2]?.[0] ?? "Topic 3",
+                    label:
+                      currentReport.topics[2]?.[0] ??
+                      "Topic 3",
                     color: "hsl(var(--chart-3))",
                   },
                 }}
-                className="w-full" style={{ height: "250px" }}
+                className="w-full"
+                style={{ height: "250px" }}
               >
                 <LineChart data={currentYearTrends}>
                   <CartesianGrid vertical={false} />
@@ -902,7 +798,9 @@ const topDifficulty: string =
                     width={30}
                   />
 
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip
+                    content={<ChartTooltipContent />}
+                  />
 
                   <Line
                     type="monotone"
@@ -933,26 +831,23 @@ const topDifficulty: string =
           </div>
         </details>
 
-        {/* QUESTION TYPES + DIFFICULTY */}
         <details className="pyq-v2-detail-card">
           <summary>
             <div className="pyq-v2-summary-icon">🧠</div>
 
             <div className="pyq-v2-summary-copy">
               <strong>Question types & difficulty</strong>
-              <span>
-                Understand what kind of questions you should practise.
-              </span>
             </div>
 
-            <span className="pyq-v2-summary-arrow">⌄</span>
+            <span className="pyq-v2-summary-arrow">
+              ⌄
+            </span>
           </summary>
 
           <div className="pyq-v2-detail-content">
             <ChartCard
               title="Question types"
-              description="The kinds of questions appearing most often."
-              takeaway={`Spend extra practice time on ${topQuestionType.toLowerCase()} questions.`}
+              takeaway={`Practise more ${topQuestionType.toLowerCase()} questions.`}
             >
               <ChartContainer
                 config={{
@@ -978,7 +873,9 @@ const topDifficulty: string =
                     width={30}
                   />
 
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip
+                    content={<ChartTooltipContent />}
+                  />
 
                   <Bar
                     dataKey="value"
@@ -991,15 +888,17 @@ const topDifficulty: string =
 
             <ChartCard
               title="Difficulty mix"
-              description="A quick view of how challenging the papers tend to be."
-              takeaway={`Keep a balanced practice set, with extra attention to ${topDifficulty.toLowerCase()} questions.`}
+              takeaway={`Focus on ${topDifficulty.toLowerCase()} questions.`}
             >
               <div className="pyq-v2-difficulty-list">
                 {currentDifficulty.map((item) => {
                   const value = Number(item.value) || 0;
 
                   return (
-                    <div className="pyq-v2-difficulty-item" key={item.name}>
+                    <div
+                      className="pyq-v2-difficulty-item"
+                      key={item.name}
+                    >
                       <div className="pyq-v2-frequency-head">
                         <span>{item.name}</span>
                         <strong>{value}%</strong>
@@ -1008,7 +907,12 @@ const topDifficulty: string =
                       <div className="pyq-v2-progress-track">
                         <div
                           className="pyq-v2-progress-fill"
-                          style={{ width: `${Math.min(value, 100)}%` }}
+                          style={{
+                            width: `${Math.min(
+                              value,
+                              100,
+                            )}%`,
+                          }}
                         />
                       </div>
                     </div>
@@ -1020,17 +924,11 @@ const topDifficulty: string =
         </details>
       </section>
 
-      {/* NEXT STEP */}
       <section className="pyq-v2-action-card">
         <div className="pyq-v2-action-content">
           <span className="pyq-v2-label">NEXT STEP</span>
 
-          <h3>Turn this analysis into a study plan</h3>
-
-          <p>
-            You now know what repeats. The next step is simply to revise,
-            practise, and test yourself in that order.
-          </p>
+          <h3>Turn your PYQs into a study plan</h3>
 
           <div className="pyq-v2-study-sequence">
             <div>
@@ -1057,7 +955,11 @@ const topDifficulty: string =
           </div>
         </div>
 
-        <Button asChild size="lg" className="pyq-v2-action-button">
+        <Button
+          asChild
+          size="lg"
+          className="pyq-v2-action-button"
+        >
           <Link
             to="/study-plan"
             search={{
@@ -1073,23 +975,18 @@ const topDifficulty: string =
   );
 }
 
-
-
 function ChartCard({
   title,
-  description,
   takeaway,
   children,
 }: {
   title: string;
-  description: string;
   takeaway?: string;
   children: ReactNode;
 }) {
   return (
     <article className="chart-card">
       <div className="chart-card-header">
-        <span>{description}</span>
         <h3>{title}</h3>
       </div>
 
